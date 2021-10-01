@@ -164,7 +164,7 @@
     <form action="/">
         <h1 style="text-align: center;">렌탈료 계산기</h1>
         <hr>
-        <h4>공급가액<span>*</span></h4>
+        <h4>장비금액<span>*</span></h4>
         <input type="text" id="supply" name="supply" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"/>
         <h4>보증금비율<span>*</span></h4>
         <div class="title-block">
@@ -229,6 +229,8 @@
                 <option value="60">60개월</option>
             </select>
         </div>
+        <h4>연요율(금리)<span>*</span></h4>
+        <input type="text" id="supply" name="supply" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"/>
         <hr>
         <h1 style="text-align: center; color: #095484;"><span style="color: #666; font-size: 16px; font-weight: bold;">월 렌탈 예상금액 : </span><span style="color: #095484; font-size: 14px;">₩</span><span id="calc_value" style="color: #095484;"></span><span style="color: #095484; font-size: 14px;"> (부가세별도)</span></h1>
         <p class="small" style="text-align: center;">각 개인 및 의뢰사의 신용도에 따라 렌탈 예상금액은 실제 산출금액과 상이 할 수 있습니다. </small>
