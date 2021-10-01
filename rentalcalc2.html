@@ -230,7 +230,7 @@
             </select>
         </div>
         <h4>연요율(금리%)<span>*</span></h4>
-        <input type="text" id="supply" name="supply" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"/>
+        <input type="text" id="percent" name="percent" placeholder="요율(%)를 입력해주세요" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"/>
         <hr>
         <h1 style="text-align: center; color: #095484;"><span style="color: #666; font-size: 16px; font-weight: bold;">월 렌탈 예상금액 : </span><span style="color: #095484; font-size: 14px;">₩</span><span id="calc_value" style="color: #095484;"></span><span style="color: #095484; font-size: 14px;"> (부가세별도)</span></h1>
         <p class="small" style="text-align: center;">각 개인 및 의뢰사의 신용도에 따라 렌탈 예상금액은 실제 산출금액과 상이 할 수 있습니다. </small>
@@ -246,7 +246,7 @@
             var supply = document.getElementById("supply").value;
             var deposit = document.getElementById("deposit").value;
             var period = document.getElementById("period").value;
-            var calc_value = (supply * ( 1 + 0.065 * period / 12) - (deposit/100) * supply) / period;
+            var calc_value = (supply * ( 1 + (percent / 100) * period / 12) - (deposit/100) * supply) / period;
             calc_value = Math.floor(calc_value);
             calc_value = calc_value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
             
