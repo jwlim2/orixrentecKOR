@@ -246,7 +246,7 @@
             var supply = document.getElementById("supply").value;
             var deposit = document.getElementById("deposit").value;
             var period = document.getElementById("period").value;
-            var calc_value = (supply * ( 1 + (percent / 100) * period / 12) - (deposit/100) * supply) / period;
+            var calc_value = (supply * ( 1 + (percent/100) * period / 12) - (deposit/100) * supply) / period;
             calc_value = Math.floor(calc_value);
             calc_value = calc_value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
             
