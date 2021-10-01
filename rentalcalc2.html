@@ -165,7 +165,7 @@
         <h1 style="text-align: center;">렌탈료 계산기</h1>
         <hr>
         <h4>장비금액<span>*</span></h4>
-        <input type="number" id="supply" name="supply" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"/>
+        <input type="text" id="supply" name="supply" onkeyup="inputNumberFormat(this)" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"/>
         <h4>보증금비율<span>*</span></h4>
         <div class="title-block">
             <select id="deposit">
@@ -229,7 +229,7 @@
                 <option value="60">60개월</option>
             </select>
         </div>
-        <h4>연요율(금리)<span>*</span></h4>
+        <h4>연요율(금리%)<span>*</span></h4>
         <input type="text" id="supply" name="supply" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"/>
         <hr>
         <h1 style="text-align: center; color: #095484;"><span style="color: #666; font-size: 16px; font-weight: bold;">월 렌탈 예상금액 : </span><span style="color: #095484; font-size: 14px;">₩</span><span id="calc_value" style="color: #095484;"></span><span style="color: #095484; font-size: 14px;"> (부가세별도)</span></h1>
