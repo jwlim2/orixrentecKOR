@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <title>렌탈료 계산기</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <style>
+        html, body {
+            min-height: 100%;
+        }
+        body, div, form, input, select {
+            padding: 0;
+            margin: 0;
+            outline: none;
+            font-family: Roboto, Arial, sans-serif;
+            font-size: 14px;
+            color: #666;
+            line-height: 22px;
+        }
+        h1, h4 {
+            margin: 15px 0 4px;
+            font-weight: 400;
+        }
+        h4 {
+            margin: 20px 0 4px;
+            font-weight: 400;
+        }
+        span {
+            color: red;
+        }
+        .small {
+            font-size: 11px;
+            line-height: 18px;
+        }
+        .testbox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: inherit;
+            padding: 3px;
+        }
+        form {
+            width: 100%;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 5px #ccc;
+        }
+        input {
+            width: calc(100% - 10px);
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            vertical-align: middle;
+        }
+        input:hover, textarea:hover, select:hover {
+            outline: none;
+            border: 1px solid #095484;
+            background: #e6eef7;
+        }
+        .title-block select, .title-block input {
+            margin-bottom: 10px;
+        }
+        select {
+            padding: 7px 0;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            background: transparent;
+        }
+        select, table {
+            width: 100%;
+        }
+        option {
+            background: #fff;
+        }
+        .day-visited, .time-visited {
+            position: relative;
+        }
+        input[type="date"]::-webkit-inner-spin-button {
+            display: none;
+        }
+        input[type="time"]::-webkit-inner-spin-button {
+            margin: 2px 22px 0 0;
+        }
+        .day-visited i, .time-visited i, input[type="date"]::-webkit-calendar-picker-indicator {
+            position: absolute;
+            top: 8px;
+            font-size: 20px;
+        }
+        .day-visited i, .time-visited i {
+            right: 5px;
+            z-index: 1;
+            color: #a9a9a9;
+        }
+        [type="date"]::-webkit-calendar-picker-indicator {
+            right: 0;
+            z-index: 2;
+            opacity: 0;
+        }
+        .question-answer label {
+            display: block;
+            padding: 0 20px 10px 0;
+        }
+        .question-answer input {
+            width: auto;
+            margin-top: -2px;
+        }
+        th, td {
+            width: 18%;
+            padding: 15px 0;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+            vertical-align: unset;
+            line-height: 18px;
+            font-weight: 400;
+            word-break: break-all;
+        }
+        .first-col {
+            width: 25%;
+            text-align: left;
+        }
+        textarea {
+            width: calc(100% - 6px);
+        }
+        .btn-block {
+            margin-top: 20px;
+            text-align: center;
+        }
+        button {
+            width: 150px;
+            padding: 10px;
+            border: none;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            background-color: #095484;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0666a3;
+        }
+        @media (min-width: 568px) {
+            .title-block {
+                display: flex;
+                justify-content: space-between;
+            }
+            .title-block select {
+                width: 30%;
+                margin-bottom: 0;
+            }
+            .title-block input {
+                width: 31%;
+                margin-bottom: 0;
+            }
+            th, td {
+                word-break: keep-all;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="testbox">
+    <form action="/">
+        <h1 style="text-align: center;">렌탈료 계산기</h1>
+        <hr>
+        <h4>공급가액<span>*</span></h4>
+        <input type="text" id="supply" name="supply" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"/>
+        <h4>보증금비율<span>*</span></h4>
+        <div class="title-block">
+            <select id="deposit">
+                <option value="0" selected>0%</option>
+                <option value="10">10%</option>
+                <option value="20">20%</option>
+                <option value="30">30%</option>
+            </select>
+        </div>
+        <h4>렌탈기간<span>*</span></h4>
+        <div class="title-block">
+            <select id="period">
+                <option value="12" selected>12개월</option>
+                <option value="13">13개월</option>
+                <option value="14">14개월</option>
+                <option value="15">15개월</option>
+                <option value="16">16개월</option>
+                <option value="17">17개월</option>
+                <option value="18">18개월</option>
+                <option value="19">19개월</option>
+                <option value="20">20개월</option>
+                <option value="21">21개월</option>
+                <option value="22">22개월</option>
+                <option value="23">23개월</option>
+                <option value="24">24개월</option>
+                <option value="25">25개월</option>
+                <option value="26">26개월</option>
+                <option value="27">27개월</option>
+                <option value="28">28개월</option>
+                <option value="29">29개월</option>
+                <option value="30">30개월</option>
+                <option value="31">31개월</option>
+                <option value="32">32개월</option>
+                <option value="33">33개월</option>
+                <option value="34">34개월</option>
+                <option value="35">35개월</option>
+                <option value="36">36개월</option>
+                <option value="37">37개월</option>
+                <option value="38">38개월</option>
+                <option value="39">39개월</option>
+                <option value="41">41개월</option>
+                <option value="42">42개월</option>
+                <option value="43">43개월</option>
+                <option value="43">43개월</option>
+                <option value="44">44개월</option>
+                <option value="45">45개월</option>
+                <option value="46">46개월</option>
+                <option value="47">47개월</option>
+                <option value="48">48개월</option>
+                <option value="49">49개월</option>
+                <option value="50">50개월</option>
+                <option value="51">51개월</option>
+                <option value="52">52개월</option>
+                <option value="53">53개월</option>
+                <option value="54">54개월</option>
+                <option value="55">55개월</option>
+                <option value="56">56개월</option>
+                <option value="57">57개월</option>
+                <option value="58">58개월</option>
+                <option value="59">59개월</option>
+                <option value="60">60개월</option>
+            </select>
+        </div>
+        <hr>
+        <h1 style="text-align: center; color: #095484;"><span style="color: #666; font-size: 16px; font-weight: bold;">월 렌탈 예상금액 : </span><span style="color: #095484; font-size: 14px;">₩</span><span id="calc_value" style="color: #095484;"></span><span style="color: #095484; font-size: 14px;"> (부가세별도)</span></h1>
+        <p class="small" style="text-align: center;">각 고객사의 신용도에 따라 렌탈 예상금액은 실제 산출금액과 상이 할 수 있습니다. </small>
+        <p class="small" style="text-align: center;">렌탈계약 종료 후 렌탈장비 소유권이전 희망 시 매매금액은 계약보증금으로 상계처리 가능합니다. </small>
+        <p class="small" style="text-align: center;">한국오릭스렌텍에서 자산매입 후 임대하는 상품으로 귀사의 부채로 계상되지 않아 신용도에 영향이 없고 재무구조 개선에 도움이 될 수 있습니다. </small>
+        <div class="btn-block">
+            <button type="button" id="calc_button" style="z-index:99;">계산하기</button>
+            <button type="button" id="refresh_button" style="background-color: whitesmoke; color: black;z-index:99;">초기화</button>
+        </div>
+    </form>
+</div>
+<script>
+    
+    $(document).ready(function() {
+        $('#calc_button').on('click', function() {
+            var supply = document.getElementById("supply").value;
+            var deposit = document.getElementById("deposit").value;
+            var period = document.getElementById("period").value;
+            var calc_value = (supply * ( 1 + 0.065 * period / 12) - (deposit/100) * supply) / period;
+            calc_value = Math.floor(calc_value);
+            calc_value = calc_value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+            $("#calc_value").text(calc_value);
+            return false;
+        });
+        $('#refresh_button').on('click', function() {
+            document.getElementById("supply").value = '';
+            document.getElementById("deposit").value = 0;
+            document.getElementById("period").value = 12;
+            $("#calc_value").text('');
+            return false;
+        });
+    });
+</script>
+</body>
+</html>
