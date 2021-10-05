@@ -282,13 +282,13 @@
         calcButton.addEventListener('click', function() {
             var supply = document.getElementById("supply").value;
           	supply = supply.split(',').join("");
-		supply = parseInt(supply);
-
+			supply = parseInt(supply);
+			var up = 1000;
             var deposit = document.getElementById("deposit").value;
             var period = document.getElementById("period").value;
             var percent = document.getElementById("percent").value;
             var calc_value = (supply * ( 1 + (percent/100) * period / 12) - (deposit/100) * supply) / period;
-            calc_value = Math.floor(calc_value);
+            calc_value = Math.floor(calc_value / up)* up;
             calc_value = calc_value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
             
             var span = document.getElementById("calc_value");
