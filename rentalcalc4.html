@@ -281,7 +281,7 @@
     var calcButton = document.getElementById("calc_button");
         calcButton.addEventListener('click', function() {
             var supply = document.getElementById("supply").value;
-          	supply = supply.split(',').replace("");
+          	supply = supply.split(',').join("");
 		supply = parseInt(supply);
 
             var deposit = document.getElementById("deposit").value;
