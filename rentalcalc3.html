@@ -4,6 +4,37 @@
     <title>렌탈료 계산기</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script type="text/javascript">
+    function inputNumberAutoComma(obj) {
+       
+        // 콤마( , )의 경우도 문자로 인식되기때문에 콤마를 따로 제거한다.
+        var deleteComma = obj.value.replace(/\,/g, "");
+
+        // 콤마( , )를 제외하고 문자가 입력되었는지를 확인한다.
+        if(isFinite(deleteComma) == false) {
+            alert("문자는 입력하실 수 없습니다.");
+            obj.value = "";
+            return false;
+        }
+       
+        // 기존에 들어가있던 콤마( , )를 제거한 이 후의 입력값에 다시 콤마( , )를 삽입한다.
+        obj.value = inputNumberWithComma(inputNumberRemoveComma(obj.value));
+    }
+   
+    // 천단위 이상의 숫자에 콤마( , )를 삽입하는 함수
+    function inputNumberWithComma(str) {
+
+        str = String(str);
+        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+    }
+
+    // 콤마( , )가 들어간 값에 콤마를 제거하는 함수
+    function inputNumberRemoveComma(str) {
+
+        str = String(str);
+        return str.replace(/[^\d]+/g, "");
+    }
+</script>
     <style>
         html, body {
             min-height: 100%;
@@ -158,35 +189,6 @@
             }
         }
     </style>
-      function inputNumberAutoComma(obj) {
-       
-        // 콤마( , )의 경우도 문자로 인식되기때문에 콤마를 따로 제거한다.
-        var deleteComma = obj.value.replace(/\,/g, "");
-
-        // 콤마( , )를 제외하고 문자가 입력되었는지를 확인한다.
-        if(isFinite(deleteComma) == false) {
-            alert("문자는 입력하실 수 없습니다.");
-            obj.value = "";
-            return false;
-        }
-       
-        // 기존에 들어가있던 콤마( , )를 제거한 이 후의 입력값에 다시 콤마( , )를 삽입한다.
-        obj.value = inputNumberWithComma(inputNumberRemoveComma(obj.value));
-    }
-   
-    // 천단위 이상의 숫자에 콤마( , )를 삽입하는 함수
-    function inputNumberWithComma(str) {
-
-        str = String(str);
-        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
-    }
-
-    // 콤마( , )가 들어간 값에 콤마를 제거하는 함수
-    function inputNumberRemoveComma(str) {
-
-        str = String(str);
-        return str.replace(/[^\d]+/g, "");
-    }
 </head>
 <body>
 <div class="testbox">
