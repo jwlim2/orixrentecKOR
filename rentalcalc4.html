@@ -35,6 +35,8 @@
         str = String(str);
         return str.replace(/[^\d]+/g, "");
     }
+
+}
 </script>
     <style>
         html, body {
@@ -275,9 +277,13 @@
     </form>
 </div>
 <script>
+
     var calcButton = document.getElementById("calc_button");
         calcButton.addEventListener('click', function() {
             var supply = document.getElementById("supply").value;
+          	supply = supply.split(',').replace("");
+			supply = parseInt(supply);
+
             var deposit = document.getElementById("deposit").value;
             var period = document.getElementById("period").value;
             var percent = document.getElementById("percent").value;
